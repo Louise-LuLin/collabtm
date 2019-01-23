@@ -183,7 +183,8 @@ int LDA::iterate_gibbs_state(bool remove, bool permute) {
   if (permute) { // Permute data.
     rshuffle(doc_states_, num_docs_, sizeof(DocState*));
     for (int j = 0; j < num_docs_; ++j)
-      rshuffle(doc_states_[j]->words_, doc_states_[j]->doc_length_, sizeof(WordInfo));
+      if (doc_states_[j]->doc_length_ > 0)
+        rshuffle(doc_states_[j]->words_, doc_states_[j]->doc_length_, sizeof(WordInfo));
   }
   vct p(lda_state_->num_topics_);
   int total_change = 0;

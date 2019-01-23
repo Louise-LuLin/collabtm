@@ -156,8 +156,12 @@ int main(int argc, char* argv[]) {
     lda->init_lda(eta, alpha, num_topics, c_train->size_vocab_);
 
     // Setting up the lda state.
+    printf("Setting lda state.\n");
     lda->setup_doc_states(c_train->docs_);
+    
+
     // first iteration
+    printf("First iteration of lda state.\n");
     lda->iterate_gibbs_state(false, false);
 
     while ((max_iter == -1 || iter < max_iter) && (max_time == -1 || total_time < max_time)) {
